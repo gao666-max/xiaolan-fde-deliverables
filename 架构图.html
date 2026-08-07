@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>小澜 · 产品与技术架构图</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, "Microsoft YaHei", sans-serif;
+  background: #ffffff; color: #1f2937; padding: 40px;
+  min-width: 1200px;
+}
+h1 { font-size:28px; margin-bottom:8px; }
+h1 span { color:#f0883e; }
+.subtitle { color:#667085; font-size:14px; margin-bottom:32px; }
+
+/* ── Layout grid ── */
+.diagram { display:flex; flex-direction:column; gap:24px; }
+.row { display:flex; gap:16px; }
+.col { flex:1; }
+.col-wide { flex:2; }
+
+/* ── Box styles ── */
+.box {
+  border:1px solid #d8dee9; border-radius:10px;
+  padding:18px 20px; background:#ffffff;
+}
+.box-title {
+  font-size:13px; font-weight:700; letter-spacing:0.08em;
+  margin-bottom:14px; display:flex; align-items:center; gap:8px;
+}
+.box-title .dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.dot-red  { background:#f85149; }
+.dot-amber { background:#f0883e; }
+.dot-blue  { background:#58a6ff; }
+.dot-green { background:#3fb950; }
+.dot-purple{ background:#bc8cff; }
+
+/* ── Pipe ── */
+.pipe-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:13px; }
+.pipe-box {
+  padding:6px 14px; border-radius:6px; font-weight:600;
+  border:1px solid; font-size:12px; white-space:nowrap;
+}
+.pipe-data   { background:rgba(88,166,255,0.12);  border-color:rgba(88,166,255,0.3);  color:#58a6ff; }
+.pipe-code   { background:rgba(240,136,62,0.12);  border-color:rgba(240,136,62,0.3);  color:#f0883e; }
+.pipe-store  { background:rgba(63,185,80,0.12);   border-color:rgba(63,185,80,0.3);   color:#3fb950; }
+.pipe-agent  { background:rgba(188,140,255,0.12);  border-color:rgba(188,140,255,0.3);  color:#bc8cff; }
+.pipe-valid  { background:rgba(248,81,73,0.12);   border-color:rgba(248,81,73,0.3);   color:#f85149; }
+.pipe-ui     { background:#f2f4f7;  border-color:#cfd4dc;  color:#344054; }
+.pipe-arrow  { color:#667085; font-size:18px; margin:0 2px; }
+.pipe-bracket{ color:#667085; font-size:13px; }
+
+/* ── Table inside boxes ── */
+table.matrix { width:100%; border-collapse:collapse; font-size:12px; line-height:1.6; }
+table.matrix th {
+  text-align:left; padding:6px 10px; font-weight:600;
+  color:#667085; border-bottom:1px solid #e4e7ec; font-size:11px;
+}
+table.matrix td {
+  padding:6px 10px; border-bottom:1px solid #eef0f3;
+  vertical-align:top;
+}
+table.matrix .code { font-family:"SF Mono",Consolas,monospace; color:#58a6ff; font-size:11px; }
+
+/* ── Degrade cards ── */
+.degrade-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+.deg-card {
+  border:1px solid #e4e7ec; border-radius:8px;
+  padding:12px; text-align:center; font-size:12px; line-height:1.5;
+}
+.deg-card b { display:block; font-size:13px; margin-bottom:4px; }
+
+/* ── Footer ── */
+.footer-note {
+  margin-top:24px; padding:12px 18px; border:1px dashed #cfd4dc;
+  border-radius:8px; font-size:13px; color:#667085; text-align:center;
+}
+.footer-note strong { color:#f0883e; }
+</style>
+</head>
+<body>
+
+<h1>产品与技术架构图 — <span>小澜</span></h1>
+<p class="subtitle">笔记侠 FDE 加速营 · 电商赛题 A · 澄野商业 CHENGYE × 澜序 LANSU · 2026-08-04</p>
+
+<div class="diagram">
+
+  <!-- ═══ ROW 1: 第一使用者 ═══ -->
+  <div class="row">
+    <div class="col box">
+      <div class="box-title"><span class="dot dot-green"></span> 第一使用者</div>
+      <p style="font-size:16px;font-weight:700;margin-bottom:4px">营销团队人群 / 内容负责人</p>
+      <p style="font-size:13px;color:#667085">不是 CEO，也不是数据分析师。公司没有专职分析师，业务人员就是第一道分析。</p>
+    </div>
+    <div class="col-wide box">
+      <div class="box-title"><span class="dot dot-green"></span> 使用节点</div>
+      <table class="matrix">
+        <tr><th>节点</th><th>频率</th><th>期望产出</th></tr>
+        <tr><td>周一早会前</td><td>每周</td><td>翻上周历史卡片，或拖新文件问一个问题</td></tr>
+        <tr><td>大场直播复盘</td><td>每场后</td><td>这场触达到谁了、和目标人群差多远</td></tr>
+        <tr><td>被 CEO 追问时</td><td>不定</td><td>打开工作历史 → 找到那张卡 → 复制 → 发群</td></tr>
+        <tr><td>月度选品 / 内容策划</td><td>每月</td><td>拖多份文件，跨表交叉验证人群假设</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ROW 2: 数据如何进入 ═══ -->
+  <div class="row">
+    <div class="col box">
+      <div class="box-title"><span class="dot dot-blue"></span> 系统预置数据（已入证据库）</div>
+      <div class="pipe-row" style="flex-direction:column;align-items:flex-start;gap:6px">
+        <div class="pipe-box pipe-data">M1 抖音成交/投放（口径不一）</div>
+        <div class="pipe-box pipe-data">M2 24场直播人群画像切片</div>
+        <div class="pipe-box pipe-data">M3 客服月报 + 客户之声样本</div>
+        <div class="pipe-box pipe-data">M4 订单底表/工单/补发</div>
+        <div class="pipe-box pipe-data">M5 五类专家访谈摘要</div>
+        <div class="pipe-box pipe-data">M6 数据口径 / 来源 / 权限规则（治理元数据）</div>
+      </div>
+    </div>
+    <div class="col box">
+      <div class="box-title"><span class="dot dot-blue"></span> 主动数据（运行时拖入）</div>
+      <div class="pipe-row" style="flex-direction:column;align-items:flex-start;gap:6px">
+        <div class="pipe-box pipe-data">用户拖入的 xlsx/xls/xlsm/csv</div>
+        <div class="pipe-box pipe-data" style="opacity:0.5;border-style:dashed">外部行业报告（P2 预留）</div>
+        <div style="font-size:12px;color:#667085;margin-top:4px">
+          文件拖入 → parse_excel →<br>结构摘要（列名/粒度/警告，<strong>不含数据行</strong>）→ 会话临时 DuckDB<br>
+          ⚠️ 上传数据默认不写入系统预置证据库，按会话使用
+        </div>
+      </div>
+    </div>
+    <div class="col box" style="display:flex;align-items:center;justify-content:center">
+      <span style="font-size:32px;color:#667085">→</span>
+    </div>
+    <div class="col box">
+      <div class="box-title"><span class="dot dot-amber"></span> 数据处理与证据化</div>
+      <div style="font-size:12px;line-height:1.7;color:#667085">
+        <strong>预置数据：</strong>已完成清洗后进入证据库<br>
+        <strong>上传数据：</strong>运行时解析、识别结构并进入会话临时库<br>
+        受控聚合、口径检查与 evidence_id 追溯<br>
+        M1-M6 规则用于边界校验和降级
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:#f0883e">
+        ⚠ 28 个指标零个来自 M5；专家观点进入 hypotheses，verified=false
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ ROW 3: 证据库 → Agent → 校验 → UI ═══ -->
+  <div class="box">
+    <div class="box-title"><span class="dot dot-blue"></span> 核心数据流</div>
+    <div class="pipe-row" style="justify-content:center;gap:16px">
+      <div style="text-align:center">
+        <div class="pipe-box pipe-store" style="font-size:14px;padding:10px 20px">DuckDB 证据库<br>+ metrics.yaml<br><span style="font-size:11px;opacity:0.7">28 指标 · 每指标带公式/来源/边界</span></div>
+      </div>
+      <span class="pipe-arrow">→</span>
+      <div style="text-align:center">
+        <div class="pipe-box pipe-agent" style="font-size:14px;padding:10px 20px">Agent 层<br>deepseek-v4-flash<br><span style="font-size:11px;opacity:0.7">5 工具 · ≤3 轮 · strict FC<br>选题 / 归因 / 措辞</span></div>
+      </div>
+      <span class="pipe-arrow">→</span>
+      <div style="text-align:center">
+        <div class="pipe-box pipe-valid" style="font-size:14px;padding:10px 20px">validator.py<br>四条校验硬拦截<br><span style="font-size:11px;opacity:0.7">不过→丢弃+dropped_count<br>多张→只留最强</span></div>
+      </div>
+      <span class="pipe-arrow">→</span>
+      <div style="text-align:center">
+        <div class="pipe-box pipe-ui" style="font-size:14px;padding:10px 20px">观点卡<br>+ 工作栏面板<br><span style="font-size:11px;opacity:0.7">追问 / 复制 / 历史</span></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:10px;font-size:12px;color:#f0883e">
+      ⚠ LLM 全程接触不到原始数据行，只看到摘要 + ≤50 行聚合结果 + 按 ID 调取的有限证据
+    </div>
+  </div>
+
+  <!-- ═══ ROW 4: 五个工具 + 五类陷阱 ═══ -->
+  <div class="row">
+    <div class="col box">
+      <div class="box-title"><span class="dot dot-purple"></span> 五个工具</div>
+      <table class="matrix">
+        <tr><th>工具</th><th>用途</th><th>调用耗时</th></tr>
+        <tr><td class="code">parse_excel</td><td>解析上传文件 → 结构摘要 + 落临时表</td><td>1–2 s</td></tr>
+        <tr><td class="code">query_metric</td><td>查预置口径指标；违反口径返回错误</td><td>~0.00 s</td></tr>
+        <tr><td class="code">query_table</td><td>通用聚合，limit 硬上限 50</td><td>~0.00 s</td></tr>
+        <tr><td class="code">get_evidence</td><td>根据 ID 取原始出处</td><td>~0.00 s</td></tr>
+        <tr><td class="code">search_voc</td><td>检索 M3 原声 + M5 观点，带 reliability</td><td>~0.00 s</td></tr>
+      </table>
+      <div style="font-size:11px;color:#667085;margin-top:8px">DuckDB 查询几乎全是 0.00s · 所有优化空间都在 LLM 侧</div>
+    </div>
+    <div class="col box">
+      <div class="box-title"><span class="dot dot-red"></span> 五类陷阱 · 代码层规避</div>
+      <table class="matrix">
+        <tr><th>材料</th><th>题面陷阱</th><th>代码拦截</th></tr>
+        <tr><td>M1</td><td>口径/单位不一；停播日；异常 ROI</td><td>分模块口径；剔除进 excluded 表</td></tr>
+        <tr><td>M2</td><td>三组人群不嵌套，不能相除</td><td class="code">ForbiddenCalculationError</td></tr>
+        <tr><td>M3</td><td>人工归纳，缺全量原始记录</td><td>sample_only；置信度上限 low；不提供比率</td></tr>
+        <tr><td>M4</td><td>商品行 ≠ 订单数；金额重复</td><td class="code">COUNT(DISTINCT 主订单号)</td></tr>
+        <tr><td>M5</td><td>专家局部真相、相互冲突</td><td>28 指标零个来自 M5；引用写"某专家认为"</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ROW 5: 人机分工 ═══ -->
+  <div class="row">
+    <div class="col box">
+      <div class="box-title"><span class="dot dot-amber"></span> AI 与人的分工</div>
+      <table class="matrix">
+        <tr><th>环节</th><th>谁负责</th><th>代码位置</th></tr>
+        <tr><td>数据清洗 / 口径对齐</td><td><strong>代码</strong></td><td class="code">src/ingest.py</td></tr>
+        <tr><td>指标计算（28 指标）</td><td><strong>代码</strong></td><td class="code">src/tools_impl.py</td></tr>
+        <tr><td>异常检测</td><td><strong>代码</strong></td><td class="code">metrics.py:detect_anomalies()</td></tr>
+        <tr><td>证据校验（硬拦截）</td><td><strong>代码</strong></td><td class="code">validator.py:299-335</td></tr>
+        <tr><td>置信度定级</td><td><strong>代码打底，AI 只能下调</strong></td><td class="code">validator.py:28-32</td></tr>
+        <tr><td>边界补全</td><td><strong>代码</strong></td><td class="code">validator.py:191-201</td></tr>
+        <tr><td>选题 / 归因 / 措辞</td><td><strong>AI</strong></td><td>DeepSeek function calling</td></tr>
+        <tr><td style="color:#f0883e"><strong>最终经营决策</strong></td><td style="color:#f0883e"><strong>业务人员</strong></td><td>Agent 明确不做决策</td></tr>
+      </table>
+    </div>
+    <div class="col box">
+      <div class="box-title"><span class="dot dot-red"></span> Agent / Skill 分工</div>
+      <table class="matrix">
+        <tr><th>Agent</th><th>职责</th></tr>
+        <tr><td><strong>数据管家</strong><br><span class="code">ingest / parse_excel / query_metric / query_table</span></td><td>清洗、口径对齐、算数、打证据 ID</td></tr>
+        <tr><td><strong>老板对话</strong><br><span class="code">DeepSeek function calling (strict beta)</span></td><td>选题、归因假设、措辞、卡片生成</td></tr>
+        <tr><td><strong>证据审计</strong><br><span class="code">validator.py</span></td><td>四条校验硬拦截 · AI 无权绕过<br>多张只留最强 · 不计入 dropped_count</td></tr>
+      </table>
+      <div class="box-title" style="margin-top:16px"><span class="dot dot-green"></span> 技术栈</div>
+      <table class="matrix">
+        <tr><td>桌宠</td><td>Tk 透明无边框 + tkinterdnd2 + Pillow</td></tr>
+        <tr><td>工作栏</td><td>pywebview 独立进程 + 原生 HTML/CSS/JS</td></tr>
+        <tr><td>后端</td><td>Python + FastAPI（桌宠自起 uvicorn）</td></tr>
+        <tr><td>数据</td><td>pandas + openpyxl + DuckDB 单文件</td></tr>
+        <tr><td>LLM</td><td>deepseek-v4-flash · function calling · strict beta</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ ROW 6: 降级路径 ═══ -->
+  <div class="box">
+    <div class="box-title"><span class="dot dot-red"></span> 降级路径（五种，全部可跑）· 宁可少说，不可错说</div>
+    <div class="degrade-grid">
+      <div class="deg-card"><b>⚡ llm_unavailable</b>DeepSeek 挂 / 超时<br>→ 模板卡片<br>证据链不少，无归因</div>
+      <div class="deg-card"><b>🚫 all_dropped</b>全部洞察未过校验<br>→ "本轮未产出可信洞察"<br>+ 原始异常 + 丢弃原因</div>
+      <div class="deg-card"><b>❓ out_of_scope</b>问题超出数据覆盖<br>→ "当前数据无法回答"<br>+ 需要补哪份数据</div>
+      <div class="deg-card"><b>📭 data_missing</b>某材料不在证据库<br>→ 列出缺哪张表<br>相关卡片不生成</div>
+      <div class="deg-card"><b>💥 system_error</b>分析链路自己崩<br>→ "系统内部出错"<br>不伪装成数据不足</div>
+    </div>
+  </div>
+
+  <!-- ═══ ROW 7: 反馈回路 ═══ -->
+  <div class="footer-note">
+    <strong>反馈回路：</strong>
+    一开始 LLM 对 M2 三组人群做了跨组相除 → 代码层增加 <code style="color:#f85149">ForbiddenCalculationError</code> 硬拦截，谁除谁报错。
+    外加白卷自动重试（快速模式约 1/3 概率交白卷 → 自动重试一次）；search_voc 关键词无命中时回落 + 显式警告。
+    <strong>这是 AI 原生做法——让 AI 进核心分析链路，不是给旧流程加聊天插件。</strong>
+  </div>
+
+</div>
+</body>
+</html>
