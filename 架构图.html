@@ -43,14 +43,13 @@ h1 span { color:#f0883e; }
   padding:6px 14px; border-radius:6px; font-weight:600;
   border:1px solid; font-size:12px; white-space:nowrap;
 }
-.pipe-data   { background:rgba(88,166,255,0.12);  border-color:rgba(88,166,255,0.3);  color:#58a6ff; }
-.pipe-code   { background:rgba(240,136,62,0.12);  border-color:rgba(240,136,62,0.3);  color:#f0883e; }
-.pipe-store  { background:rgba(63,185,80,0.12);   border-color:rgba(63,185,80,0.3);   color:#3fb950; }
-.pipe-agent  { background:rgba(188,140,255,0.12);  border-color:rgba(188,140,255,0.3);  color:#bc8cff; }
-.pipe-valid  { background:rgba(248,81,73,0.12);   border-color:rgba(248,81,73,0.3);   color:#f85149; }
+.pipe-data   { background:rgba(31,111,196,0.10);  border-color:rgba(31,111,196,0.35);  color:#1f6fc4; }
+.pipe-code   { background:rgba(180,95,25,0.10);   border-color:rgba(180,95,25,0.35);   color:#b45f19; }
+.pipe-store  { background:rgba(35,134,54,0.10);   border-color:rgba(35,134,54,0.35);   color:#238636; }
+.pipe-agent  { background:rgba(124,58,213,0.10);  border-color:rgba(124,58,213,0.35);  color:#7c3ad5; }
+.pipe-valid  { background:rgba(200,40,33,0.10);   border-color:rgba(200,40,33,0.35);   color:#c82821; }
 .pipe-ui     { background:#f2f4f7;  border-color:#cfd4dc;  color:#344054; }
 .pipe-arrow  { color:#667085; font-size:18px; margin:0 2px; }
-.pipe-bracket{ color:#667085; font-size:13px; }
 
 /* ── Table inside boxes ── */
 table.matrix { width:100%; border-collapse:collapse; font-size:12px; line-height:1.6; }
@@ -62,7 +61,7 @@ table.matrix td {
   padding:6px 10px; border-bottom:1px solid #eef0f3;
   vertical-align:top;
 }
-table.matrix .code { font-family:"SF Mono",Consolas,monospace; color:#58a6ff; font-size:11px; }
+table.matrix .code { font-family:"SF Mono",Consolas,monospace; color:#1f6fc4; font-size:11px; }
 
 /* ── Degrade cards ── */
 .degrade-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
@@ -77,7 +76,8 @@ table.matrix .code { font-family:"SF Mono",Consolas,monospace; color:#58a6ff; fo
   margin-top:24px; padding:12px 18px; border:1px dashed #cfd4dc;
   border-radius:8px; font-size:13px; color:#667085; text-align:center;
 }
-.footer-note strong { color:#f0883e; }
+.footer-note strong { color:#b45f19; }
+.hint { font-size:11px; color:#667085; line-height:1.7; }
 </style>
 </head>
 <body>
@@ -109,23 +109,29 @@ table.matrix .code { font-family:"SF Mono",Consolas,monospace; color:#58a6ff; fo
   <!-- ═══ ROW 2: 数据如何进入 ═══ -->
   <div class="row">
     <div class="col box">
-      <div class="box-title"><span class="dot dot-blue"></span> 系统预置数据（已入证据库）</div>
+      <div class="box-title"><span class="dot dot-blue"></span> 系统预置数据（离线清洗后入证据库）</div>
       <div class="pipe-row" style="flex-direction:column;align-items:flex-start;gap:6px">
-        <div class="pipe-box pipe-data">M1 抖音成交/投放（口径不一）</div>
-        <div class="pipe-box pipe-data">M2 24场直播人群画像切片</div>
+        <div class="pipe-box pipe-data">M1 抖音成交 / 投放（口径不一）</div>
+        <div class="pipe-box pipe-data">M2 直播人群画像切片（入库 23 场）</div>
         <div class="pipe-box pipe-data">M3 客服月报 + 客户之声样本</div>
-        <div class="pipe-box pipe-data">M4 订单底表/工单/补发</div>
-        <div class="pipe-box pipe-data">M5 五类专家访谈摘要</div>
-        <div class="pipe-box pipe-data">M6 数据口径 / 来源 / 权限规则（治理元数据）</div>
+        <div class="pipe-box pipe-data">M4 订单底表 / 工单 / 补发</div>
+        <div class="pipe-box pipe-data">M5 五类专家访谈摘要 → hypotheses 表</div>
+        <div class="pipe-box pipe-data" style="border-style:dashed;opacity:0.75">M6 口径 / 来源 / 权限规则</div>
+        <div class="hint" style="margin-top:4px">
+          <strong>M6 不作为证据表入库</strong>——它被吸收进 <span class="code" style="color:#1f6fc4">metrics.yaml</span>
+          的口径定义与 <span class="code" style="color:#1f6fc4">ingest.py</span> 的清洗规则
+          （「分」单位字段、M4 履约口径、M3 无法抓取全量的确认）
+        </div>
       </div>
     </div>
     <div class="col box">
       <div class="box-title"><span class="dot dot-blue"></span> 主动数据（运行时拖入）</div>
       <div class="pipe-row" style="flex-direction:column;align-items:flex-start;gap:6px">
-        <div class="pipe-box pipe-data">用户拖入的 xlsx/xls/xlsm/csv</div>
+        <div class="pipe-box pipe-data">用户拖入的 xlsx / xls / xlsm / csv</div>
         <div class="pipe-box pipe-data" style="opacity:0.5;border-style:dashed">外部行业报告（P2 预留）</div>
-        <div style="font-size:12px;color:#667085;margin-top:4px">
-          文件拖入 → parse_excel →<br>结构摘要（列名/粒度/警告，<strong>不含数据行</strong>）→ 会话临时 DuckDB<br>
+        <div class="hint" style="margin-top:4px">
+          文件拖入 → <span class="code" style="color:#1f6fc4">parse_excel</span> →
+          结构摘要（列名 / 粒度 / 警告，<strong>不含数据行</strong>）→ 会话临时 DuckDB，任务结束即释放<br>
           ⚠️ 上传数据默认不写入系统预置证据库，按会话使用
         </div>
       </div>
@@ -136,39 +142,79 @@ table.matrix .code { font-family:"SF Mono",Consolas,monospace; color:#58a6ff; fo
     <div class="col box">
       <div class="box-title"><span class="dot dot-amber"></span> 数据处理与证据化</div>
       <div style="font-size:12px;line-height:1.7;color:#667085">
-        <strong>预置数据：</strong>已完成清洗后进入证据库<br>
+        <strong>预置数据：</strong>离线清洗后进入证据库，每个数字挂 evidence_id<br>
         <strong>上传数据：</strong>运行时解析、识别结构并进入会话临时库<br>
         受控聚合、口径检查与 evidence_id 追溯<br>
-        M1-M6 规则用于边界校验和降级
+        M1–M6 规则用于边界校验和降级
       </div>
-      <div style="margin-top:10px;font-size:11px;color:#f0883e">
-        ⚠ 28 个指标零个来自 M5；专家观点进入 hypotheses，verified=false
+      <div style="margin-top:10px;font-size:11px;color:#b45f19">
+        ⚠ 32 个指标零个来自 M5；专家观点只进 hypotheses，verified=false
       </div>
     </div>
   </div>
 
   <!-- ═══ ROW 3: 证据库 → Agent → 校验 → UI ═══ -->
   <div class="box">
-    <div class="box-title"><span class="dot dot-blue"></span> 核心数据流</div>
+    <div class="box-title"><span class="dot dot-blue"></span> 核心数据流 · 一次工作 = 一张卡</div>
     <div class="pipe-row" style="justify-content:center;gap:16px">
       <div style="text-align:center">
-        <div class="pipe-box pipe-store" style="font-size:14px;padding:10px 20px">DuckDB 证据库<br>+ metrics.yaml<br><span style="font-size:11px;opacity:0.7">28 指标 · 每指标带公式/来源/边界</span></div>
+        <div class="pipe-box pipe-store" style="font-size:14px;padding:10px 20px">DuckDB 证据库<br>+ metrics.yaml<br><span style="font-size:11px;opacity:0.75">32 指标 · 每指标带公式 / 来源 / 边界</span></div>
       </div>
       <span class="pipe-arrow">→</span>
       <div style="text-align:center">
-        <div class="pipe-box pipe-agent" style="font-size:14px;padding:10px 20px">Agent 层<br>deepseek-v4-flash<br><span style="font-size:11px;opacity:0.7">5 工具 · ≤3 轮 · strict FC<br>选题 / 归因 / 措辞</span></div>
+        <div class="pipe-box pipe-agent" style="font-size:14px;padding:10px 20px">Agent 层<br>deepseek-v4-flash<br><span style="font-size:11px;opacity:0.75">5 工具 · ≤3 轮 · strict FC<br>选题 / 归因 / 措辞</span></div>
       </div>
       <span class="pipe-arrow">→</span>
       <div style="text-align:center">
-        <div class="pipe-box pipe-valid" style="font-size:14px;padding:10px 20px">validator.py<br>四条校验硬拦截<br><span style="font-size:11px;opacity:0.7">不过→丢弃+dropped_count<br>多张→只留最强</span></div>
+        <div class="pipe-box pipe-valid" style="font-size:14px;padding:10px 20px">validator.py<br>四条校验硬拦截<br><span style="font-size:11px;opacity:0.75">不过 → 丢弃 + dropped_count<br>多张 → 只留最强</span></div>
       </div>
       <span class="pipe-arrow">→</span>
       <div style="text-align:center">
-        <div class="pipe-box pipe-ui" style="font-size:14px;padding:10px 20px">观点卡<br>+ 工作栏面板<br><span style="font-size:11px;opacity:0.7">追问 / 复制 / 历史</span></div>
+        <div class="pipe-box pipe-ui" style="font-size:14px;padding:10px 20px">观点卡<br>+ 工作栏面板<br><span style="font-size:11px;opacity:0.75">可信度 / 洞察 / 注意事项 / 证据</span></div>
       </div>
     </div>
-    <div style="text-align:center;margin-top:10px;font-size:12px;color:#f0883e">
+    <div style="text-align:center;margin-top:10px;font-size:12px;color:#b45f19">
       ⚠ LLM 全程接触不到原始数据行，只看到摘要 + ≤50 行聚合结果 + 按 ID 调取的有限证据
+    </div>
+  </div>
+
+  <!-- ═══ ROW 3.5: 两条旁路 ═══ -->
+  <div class="row">
+    <div class="col-wide box">
+      <div class="box-title"><span class="dot dot-purple"></span> 旁路一：追问 —— 独立轻链路，不重跑分析</div>
+      <div class="pipe-row" style="gap:8px">
+        <div class="pipe-box pipe-ui">卡片上点「追问」</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-box pipe-agent">POST /api/chat<br><span style="font-size:11px;opacity:0.75">src/chat.py</span></div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-box pipe-agent">卡片上下文够 → 直接答</div>
+        <span class="pipe-arrow">／</span>
+        <div class="pipe-box pipe-store">要查历史数据 → 只给 1 轮工具</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-box pipe-ui">答案落在卡片下方</div>
+      </div>
+      <table class="matrix" style="margin-top:12px">
+        <tr><th>刻意不做什么</th><th>为什么</th></tr>
+        <tr><td><strong>不过证据校验层、不产出新卡、不进工作历史</strong></td><td>追问的产出是一段话，不是第二张卡</td></tr>
+        <tr><td><strong>默认关思考模式</strong>（实测 14s → 2.5s）</td><td>对方在等你说话，不是在等一次新分析</td></tr>
+        <tr><td>工具只给 <span class="code">query_metric / query_table / search_voc / get_evidence</span>，单轮 ≤4 次</td><td>不许重新解析上传文件——那要几十秒，正是追问最不能忍的慢</td></tr>
+        <tr><td>不许自己加减乘除、不许编来源</td><td>与主链路同一条铁律</td></tr>
+      </table>
+    </div>
+    <div class="col box">
+      <div class="box-title"><span class="dot dot-amber"></span> 旁路二：速度控制 · 鞭子</div>
+      <div style="font-size:12px;line-height:1.8;color:#667085">
+        点鞭子 → <span class="code" style="color:#1f6fc4">/api/whip</span> 为<strong>下一次</strong>任务排队快速模式，
+        真的会改后端 thinking 参数——<strong>只播加速动画而参数不变，视为未完成</strong>。
+      </div>
+      <table class="matrix" style="margin-top:10px">
+        <tr><th>快速模式减什么</th><th>一步不减什么</th></tr>
+        <tr><td>工具调用轮次腰斩<br>（少思考、少探索）</td><td>文件解析<br>证据校验<br>置信度重算</td></tr>
+      </table>
+      <div style="margin-top:10px;font-size:11px;color:#b45f19">
+        ⚠ 代价必须明示：快速模式约 1/3 概率交白卷 → 自动重试一次；
+        但 dropped&gt;0 与 data_gap <strong>绝不重试</strong>
+      </div>
     </div>
   </div>
 
@@ -184,17 +230,17 @@ table.matrix .code { font-family:"SF Mono",Consolas,monospace; color:#58a6ff; fo
         <tr><td class="code">get_evidence</td><td>根据 ID 取原始出处</td><td>~0.00 s</td></tr>
         <tr><td class="code">search_voc</td><td>检索 M3 原声 + M5 观点，带 reliability</td><td>~0.00 s</td></tr>
       </table>
-      <div style="font-size:11px;color:#667085;margin-top:8px">DuckDB 查询几乎全是 0.00s · 所有优化空间都在 LLM 侧</div>
+      <div class="hint" style="margin-top:8px">DuckDB 查询几乎全是 0.00 s · <strong>所有优化空间都在 LLM 侧</strong></div>
     </div>
     <div class="col box">
       <div class="box-title"><span class="dot dot-red"></span> 五类陷阱 · 代码层规避</div>
       <table class="matrix">
         <tr><th>材料</th><th>题面陷阱</th><th>代码拦截</th></tr>
-        <tr><td>M1</td><td>口径/单位不一；停播日；异常 ROI</td><td>分模块口径；剔除进 excluded 表</td></tr>
+        <tr><td>M1</td><td>口径 / 单位不一；停播日；异常 ROI</td><td>分模块口径；剔除进 excluded 表</td></tr>
         <tr><td>M2</td><td>三组人群不嵌套，不能相除</td><td class="code">ForbiddenCalculationError</td></tr>
         <tr><td>M3</td><td>人工归纳，缺全量原始记录</td><td>sample_only；置信度上限 low；不提供比率</td></tr>
         <tr><td>M4</td><td>商品行 ≠ 订单数；金额重复</td><td class="code">COUNT(DISTINCT 主订单号)</td></tr>
-        <tr><td>M5</td><td>专家局部真相、相互冲突</td><td>28 指标零个来自 M5；引用写"某专家认为"</td></tr>
+        <tr><td>M5</td><td>专家局部真相、相互冲突</td><td>32 指标零个来自 M5；引用写「某专家认为」</td></tr>
       </table>
     </div>
   </div>
@@ -206,13 +252,13 @@ table.matrix .code { font-family:"SF Mono",Consolas,monospace; color:#58a6ff; fo
       <table class="matrix">
         <tr><th>环节</th><th>谁负责</th><th>代码位置</th></tr>
         <tr><td>数据清洗 / 口径对齐</td><td><strong>代码</strong></td><td class="code">src/ingest.py</td></tr>
-        <tr><td>指标计算（28 指标）</td><td><strong>代码</strong></td><td class="code">src/tools_impl.py</td></tr>
-        <tr><td>异常检测</td><td><strong>代码</strong></td><td class="code">metrics.py:detect_anomalies()</td></tr>
-        <tr><td>证据校验（硬拦截）</td><td><strong>代码</strong></td><td class="code">validator.py:299-335</td></tr>
-        <tr><td>置信度定级</td><td><strong>代码打底，AI 只能下调</strong></td><td class="code">validator.py:28-32</td></tr>
-        <tr><td>边界补全</td><td><strong>代码</strong></td><td class="code">validator.py:191-201</td></tr>
+        <tr><td>指标计算（32 指标）</td><td><strong>代码</strong></td><td class="code">metrics.yaml + src/tools_impl.py</td></tr>
+        <tr><td>异常检测</td><td><strong>代码</strong></td><td class="code">src/metrics.py</td></tr>
+        <tr><td>证据校验（四条硬拦截）</td><td><strong>代码</strong></td><td class="code">src/validator.py</td></tr>
+        <tr><td>置信度定级</td><td><strong>代码打底，AI 只能下调</strong></td><td class="code">validator.min_confidence()</td></tr>
+        <tr><td>边界补全（注意事项）</td><td><strong>代码</strong></td><td class="code">src/validator.py</td></tr>
         <tr><td>选题 / 归因 / 措辞</td><td><strong>AI</strong></td><td>DeepSeek function calling</td></tr>
-        <tr><td style="color:#f0883e"><strong>最终经营决策</strong></td><td style="color:#f0883e"><strong>业务人员</strong></td><td>Agent 明确不做决策</td></tr>
+        <tr><td style="color:#b45f19"><strong>最终经营决策</strong></td><td style="color:#b45f19"><strong>业务人员</strong></td><td>Agent 明确不做决策</td></tr>
       </table>
     </div>
     <div class="col box">
@@ -221,13 +267,14 @@ table.matrix .code { font-family:"SF Mono",Consolas,monospace; color:#58a6ff; fo
         <tr><th>Agent</th><th>职责</th></tr>
         <tr><td><strong>数据管家</strong><br><span class="code">ingest / parse_excel / query_metric / query_table</span></td><td>清洗、口径对齐、算数、打证据 ID</td></tr>
         <tr><td><strong>老板对话</strong><br><span class="code">DeepSeek function calling (strict beta)</span></td><td>选题、归因假设、措辞、卡片生成</td></tr>
-        <tr><td><strong>证据审计</strong><br><span class="code">validator.py</span></td><td>四条校验硬拦截 · AI 无权绕过<br>多张只留最强 · 不计入 dropped_count</td></tr>
+        <tr><td><strong>证据审计</strong><br><span class="code">src/validator.py</span></td><td>四条校验硬拦截 · AI 无权绕过<br>多张只留最强 · 不计入 dropped_count</td></tr>
       </table>
       <div class="box-title" style="margin-top:16px"><span class="dot dot-green"></span> 技术栈</div>
       <table class="matrix">
+        <tr><th>层</th><th>用什么</th></tr>
         <tr><td>桌宠</td><td>Tk 透明无边框 + tkinterdnd2 + Pillow</td></tr>
         <tr><td>工作栏</td><td>pywebview 独立进程 + 原生 HTML/CSS/JS</td></tr>
-        <tr><td>后端</td><td>Python + FastAPI（桌宠自起 uvicorn）</td></tr>
+        <tr><td>后端</td><td>Python + FastAPI（桌宠自起 uvicorn，随机空闲端口）</td></tr>
         <tr><td>数据</td><td>pandas + openpyxl + DuckDB 单文件</td></tr>
         <tr><td>LLM</td><td>deepseek-v4-flash · function calling · strict beta</td></tr>
       </table>
@@ -239,18 +286,22 @@ table.matrix .code { font-family:"SF Mono",Consolas,monospace; color:#58a6ff; fo
     <div class="box-title"><span class="dot dot-red"></span> 降级路径（五种，全部可跑）· 宁可少说，不可错说</div>
     <div class="degrade-grid">
       <div class="deg-card"><b>⚡ llm_unavailable</b>DeepSeek 挂 / 超时<br>→ 模板卡片<br>证据链不少，无归因</div>
-      <div class="deg-card"><b>🚫 all_dropped</b>全部洞察未过校验<br>→ "本轮未产出可信洞察"<br>+ 原始异常 + 丢弃原因</div>
-      <div class="deg-card"><b>❓ out_of_scope</b>问题超出数据覆盖<br>→ "当前数据无法回答"<br>+ 需要补哪份数据</div>
+      <div class="deg-card"><b>🚫 all_dropped</b>全部洞察未过校验<br>→「本轮未产出可信洞察」<br>+ 原始异常 + 丢弃原因</div>
+      <div class="deg-card"><b>❓ out_of_scope</b>问题超出数据覆盖<br>→「当前数据无法回答」<br>+ 需要补哪份数据</div>
       <div class="deg-card"><b>📭 data_missing</b>某材料不在证据库<br>→ 列出缺哪张表<br>相关卡片不生成</div>
-      <div class="deg-card"><b>💥 system_error</b>分析链路自己崩<br>→ "系统内部出错"<br>不伪装成数据不足</div>
+      <div class="deg-card"><b>💥 system_error</b>分析链路自己崩<br>→「系统内部出错」<br>不伪装成数据不足</div>
+    </div>
+    <div style="text-align:center;margin-top:10px;font-size:12px;color:#667085">
+      五种说法互不伪装 —— 系统崩了就说系统崩了，不会说成「数据不足」
     </div>
   </div>
 
   <!-- ═══ ROW 7: 反馈回路 ═══ -->
   <div class="footer-note">
     <strong>反馈回路：</strong>
-    一开始 LLM 对 M2 三组人群做了跨组相除 → 代码层增加 <code style="color:#f85149">ForbiddenCalculationError</code> 硬拦截，谁除谁报错。
-    外加白卷自动重试（快速模式约 1/3 概率交白卷 → 自动重试一次）；search_voc 关键词无命中时回落 + 显式警告。
+    一开始 LLM 对 M2 三组人群做了跨组相除 → 代码层增加
+    <span class="code" style="color:#c82821">ForbiddenCalculationError</span> 硬拦截，谁除谁报错。
+    外加白卷自动重试；<span class="code" style="color:#1f6fc4">search_voc</span> 关键词无命中时回落 + 显式警告。
     <strong>这是 AI 原生做法——让 AI 进核心分析链路，不是给旧流程加聊天插件。</strong>
   </div>
 

@@ -1,68 +1,31 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-themes="pitch-deck-vc,corporate-clean,minimal-white,swiss-grid">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>小澜 · Demo Day</title>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0d1117;--surface:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.12);--text:#e6edf3;--text2:#8b949e;--accent:#f0883e;--red:#f85149;--green:#3fb950;--blue:#58a6ff;--purple:#bc8cff;--grad:linear-gradient(135deg,#f0883e,#f85149)}
-html,body{height:100%;overflow:hidden;font-family:-apple-system,"Microsoft YaHei",sans-serif}
-body{background:var(--bg);color:var(--text)}
-.deck{width:100vw;height:100vh;overflow:hidden}
-.slide{width:100vw;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:5vh 6vw;display:none}
-.slide.active{display:flex}
-.kicker{font-size:14px;color:var(--text2);letter-spacing:0.1em;margin-bottom:12px}
-.h1{font-size:clamp(32px,5vw,60px);line-height:1.15;font-weight:800}
-.h2{font-size:clamp(28px,4vw,48px);line-height:1.25;font-weight:700}
-.lede{font-size:18px;color:var(--text2)}
-.accent{color:var(--accent)}
-.mt-s{margin-top:12px}.mt-m{margin-top:20px}.mt-l{margin-top:32px}
-.mono{font-family:"SF Mono",Consolas,monospace;font-size:13px}
-.stack{display:flex;flex-direction:column;gap:12px}
-.grid{display:grid;gap:16px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
-.card-accent{border-color:rgba(240,136,62,0.25);background:rgba(240,136,62,0.04)}
-.card h4{font-size:16px;margin-bottom:6px;color:var(--accent)}
-.dim{font-size:14px;color:var(--text2);line-height:1.6}
-.rule-row{display:flex;gap:14px;align-items:flex-start}
-.rule-row .num{flex-shrink:0;width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;background:rgba(255,255,255,0.06);color:var(--text)}
-.rule-row .num.red{background:rgba(248,81,73,0.15);color:var(--red)}
-.rule-row .num.blue{background:rgba(88,166,255,0.15);color:var(--blue)}
-.rule-row .num.green{background:rgba(63,185,80,0.15);color:var(--green)}
-.rule-row .num.purple{background:rgba(188,140,255,0.15);color:var(--purple)}
-.rule-row .num.orange{background:rgba(240,136,62,0.15);color:var(--accent)}
-.rule-row b{font-size:15px;display:block;margin-bottom:2px}
-.feature-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
-.feature-row .num{flex-shrink:0;width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;background:rgba(255,255,255,0.06);color:var(--text)}
-.num.blue{background:rgba(88,166,255,0.15);color:var(--blue)}.num.green{background:rgba(63,185,80,0.15);color:var(--green)}.num.orange{background:rgba(240,136,62,0.15);color:var(--accent)}.num.purple{background:rgba(188,140,255,0.15);color:var(--purple)}
-.speaker{display:flex;align-items:center;gap:12px;margin-top:28px;font-size:15px}
-.speaker .av{width:36px;height:36px;border-radius:50%;background:var(--grad)}
-.speaker span{display:block;font-size:13px;color:var(--text2)}
-.deck-footer{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-top:auto;padding-top:20px}
-.code-block{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:14px 18px;font-family:"SF Mono",Consolas,monospace;font-size:12px;line-height:1.7;color:var(--text2)}
-.code-block .comment{color:var(--text-3)}
-.nav-hint{position:fixed;bottom:12px;left:12px;font-size:11px;color:rgba(255,255,255,0.2);z-index:100;pointer-events:none}
-.pipe-box{display:inline-block;padding:5px 10px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap}
-thead th{text-align:left;padding:6px 10px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2)}
-tbody td{padding:6px 10px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:14px;vertical-align:top}
-</style>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" id="theme-link" href="assets/themes/pitch-deck-vc.css">
+<link rel="stylesheet" href="assets/animations/animations.css">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="tpl-presenter-mode-reveal">
 <div class="deck">
 
-<!-- P1 -->
-<section class="slide active" id="s1">
+<!-- ════════════ P1 ════════════ -->
+<section class="slide" data-title="Cover">
 <p class="kicker">FDE Demo Day · 电商赛道 · 12 min</p>
-<h1 class="h1">一家懂 30-50 岁用户的公司，<br><span class="accent">怎么懂 18-30 岁的人？</span></h1>
+<h1 class="h1 anim-fade-up" data-anim="fade-up">一家懂 30-50 岁用户的公司，<br><span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">怎么懂 18-30 岁的人？</span></h1>
 <p class="lede mt-m">小澜 —— 一个可以被鞭打的老板数字分身</p>
-<p class="lede" style="font-size:16px;margin-top:6px">澄野商业 × 澜序 LANSU</p>
+<p class="lede" style="font-size:16px;color:var(--text-3);margin-top:6px">澄野商业 × 澜序 LANSU</p>
 <div class="speaker"><div class="av"></div><div><b>向 CEO 汇报</b><span>高佳慧 · 邵俊钦 · 梁曦霖</span></div></div>
-<div class="deck-footer"><span class="mono">#人群洞察 #证据链 #Agent</span><span>1 / 12</span></div>
+<div class="deck-footer"><span class="mono">#人群洞察 #证据链 #Agent</span><span class="slide-number" data-current="1" data-total="12"></span></div>
+<aside class="notes"><p>一家在 30 到 50 岁用户身上做了五年的内衣公司，刚接了一个面向 18 到 30 岁年轻人的新品牌。他们最大的焦虑不是投流——是他们根本不了解这群年轻人。我们做的事叫"小澜"——一个可以被鞭打的老板数字分身。它做的事就一件：让你说的每一句"我觉得"，都能点回原表哪一行。</p></aside>
 </section>
 
-<!-- P2 -->
-<section class="slide" id="s2">
+<!-- ════════════ P2 ════════════ -->
+<section class="slide" data-title="Why Current Methods Fail">
 <p class="kicker">01 · 我们看到问题</p>
 <h2 class="h2">不是缺数据，<br>是<span class="accent">现有方法没法把信息变成判断</span></h2>
 <div class="stack mt-l">
@@ -70,63 +33,80 @@ tbody td{padding:6px 10px;border-bottom:1px solid rgba(255,255,255,0.06);font-si
 <div class="rule-row"><span class="num red">02</span><div><b>散落数据串不起来</b><p class="dim">M1 说退款 47%，M2 说年轻人曝光只占 15.5%，M3 说尺码问题最多——但三件事分散在不同部门的表格里，口径还不统一。没人把它们放在一起看。</p></div></div>
 <div class="rule-row"><span class="num red">03</span><div><b>没有反馈机制</b><p class="dim">今天做的判断——"年轻人应该喜欢这个款式"——对了还是错了？三个月后没人回头验证。下一次开会还是靠感觉。</p></div></div>
 </div>
-<p class="mono mt-m" style="color:var(--accent)">CEO 直接给了我们三种死法：不能只画画像 / 不能做聊天机器人 / 不能增加录入负担</p>
-<div class="deck-footer"><span class="mono">#问题定义</span><span>2 / 12</span></div>
+<p class="mono mt-m" style="font-size:13px;color:var(--accent)">CEO 直接给了我们三种死法：不能只画画像 / 不能做聊天机器人 / 不能增加录入负担</p>
+<aside class="notes"><p>目前营销团队靠个人经验、平台后台截图、人工刷内容、零散会议。三个问题：经验型判断无法验证、散落数据串不起来、没有反馈机制。CEO给了三种死法。</p></aside>
 </section>
 
-<!-- P3 -->
-<section class="slide" id="s3">
+<!-- ════════════ P3 ════════════ -->
+<section class="slide" data-title="Three Facts">
 <p class="kicker">02 · 三个事实</p>
 <h2 class="h2">数据里已经写着答案，<br>只是<span class="accent">没人把它们串起来</span></h2>
 <div class="stack mt-l">
-<div class="rule-row"><span class="num red">01</span><div><b>触达错配</b><span class="mono"> · M2 · F 事实</span><p class="dim">24 场直播，18-30 岁仅占曝光 <strong>15.5%</strong>，18-24 岁 TGI <strong>0.27</strong>（最低 0.17）。TGI 是人群偏好指数，1.0 是平均水平——0.27 就是严重偏低。整条流量链路朝成熟人群倾斜。</p></div></div>
-<div class="rule-row"><span class="num red">02</span><div><b>直播高退款源于期待错位</b><span class="mono"> · M1-05 + M3 · I 推断</span><p class="dim">6 月退款金额率 <strong>47%</strong>，直播占退款 <strong>68%</strong>。客服原声："视频双肩带、链接单肩带""有点凸点""穿身上闷"——期待错位写在原话里。M3 是人工样本不是全量，所以标 I。</p></div></div>
-<div class="rule-row"><span class="num red">03</span><div><b>专家最担心 AI 胡说</b><span class="mono"> · M5 · H 假设</span><p class="dim">五位内部专家几乎全部关注 AI 可靠性——他们也互相冲突。这条直接决定了我们的架构：<strong>校验层不是可选项，是必选项。专家观点进假设库，不进规则层。</strong></p></div></div>
+<div class="rule-row"><span class="num red">01</span><div>
+<b>触达错配</b><span class="mono"> · M2 · F 事实</span>
+<p class="dim">24 场直播，18-30 岁仅占曝光 <strong>15.5%</strong>，18-24 岁 TGI <strong>0.27</strong>（最低 0.17）。TGI 是人群偏好指数，1.0 是平均水平——0.27 就是严重偏低。整条流量链路朝成熟人群倾斜。</p>
+</div></div>
+<div class="rule-row"><span class="num red">02</span><div>
+<b>直播高退款源于期待错位</b><span class="mono"> · M1-05 + M3 · I 推断</span>
+<p class="dim">6 月退款金额率 <strong>47%</strong>，直播占退款 <strong>68%</strong>。客服原声："视频双肩带、链接单肩带""有点凸点""穿身上闷"——期待错位写在原话里。M3 是人工样本不是全量，所以标 I。</p>
+</div></div>
+<div class="rule-row"><span class="num red">03</span><div>
+<b>专家最担心 AI 胡说</b><span class="mono"> · M5 · H 假设</span>
+<p class="dim">五位内部专家几乎全部关注 AI 可靠性——他们也互相冲突。这条直接决定了我们的架构：<strong>校验层不是可选项，是必选项。专家观点进假设库，不进规则层。</strong></p>
+</div></div>
 </div>
-<p class="mono mt-s" style="font-size:12px;color:var(--text2)">F=事实 · I=推断 · H=假设 —— 每个数字都标了证据等级，这是和"刷抖音感觉"的区别</p>
-<div class="deck-footer"><span class="mono">#数据事实</span><span>3 / 12</span></div>
+<p class="mono mt-s" style="font-size:12px;color:var(--text-3)">F=事实 · I=推断 · H=假设 —— 每个数字都标了证据等级，这是和"刷抖音感觉"的区别</p>
+<aside class="notes"><p>三个事实。每条都标了来源和证据等级——F是事实、I是推断、H是假设。事实一触达错配。事实二退款47%，M3是人工样本所以标I。事实三M5五位专家担心AI胡说，校验层是必选项。</p></aside>
 </section>
 
-<!-- P4 Demo -->
-<section class="slide" id="s4">
+<!-- ════════════ P4 ════════════ -->
+<section class="slide" data-title="Live Demo">
 <p class="kicker">03 · Live Demo</p>
 <div style="display:flex;align-items:center;justify-content:center;height:70vh;text-align:center">
 <div>
-<h2 class="h2" style="font-size:clamp(44px,5.6vw,72px);line-height:1.2">把文件拖给老板<br><span class="accent">三分钟后拿到一张</span><br>可直接发群的观点卡</h2>
+<h2 class="h2" style="font-size:clamp(44px,5.6vw,72px);line-height:1.2;margin-bottom:12px">把文件拖给老板<br><span class="accent">三分钟后拿到一张</span><br>可直接发群的观点卡</h2>
 <p class="lede" style="font-size:22px;color:var(--accent);margin-top:28px">每一步都能点回原表哪一行。</p>
 </div>
 </div>
-<div class="deck-footer"><span class="mono">#LiveDemo</span><span>4 / 12</span></div>
+<aside class="notes"><p>先说清楚用了什么AI：DeepSeek选题和措辞，代码算数。LLM永远看不到原始数据行。Edward你开始。拖M2人群画像表。用跨表问题。点开证据看原表行列。抽鞭子真的改thinking参数。深度~28次工具调用，快速腰斩。用户自己决定要深度还是要速度。</p></aside>
 </section>
 
-<!-- P5 -->
-<section class="slide" id="s5">
+<!-- ════════════ P5 ════════════ -->
+<section class="slide" data-title="Insight 1">
 <p class="kicker">04 · 洞察 ① · 邵俊钦</p>
 <h2 class="h2">年轻人在哪？<br><span class="accent">没在我们这。</span></h2>
 <div class="grid g2 mt-l">
-<div><div class="card card-accent"><h4>🔴 高置信度</h4><p class="dim">M2 24 场全量人群画像 + M1 千川投放，两个独立来源交叉验证。</p></div>
-<div class="card mt-s"><h4>📊 核心数字</h4><p class="dim">18-30 岁曝光仅占 <strong>15.5%</strong> · 18-24 TGI <strong>0.27</strong>（最低 0.17）<br>TGI = 人群偏好指数，1.0 是平均水平，0.27 = 严重偏低<br>千川投放 31-40 岁占计划数 62% · 整条链路朝成熟人群倾斜</p></div></div>
-<div><div class="card card-accent"><h4>⚠️ 两个前提</h4><p class="dim">① M2 三组人群不嵌套，不能相除算转化率——"看到了没转化"这件事暂时说不了<br>② 仅 6 月单月快照，长期规律待验证</p></div>
-<div class="card mt-s"><h4>👤 人判断什么</h4><p class="dim"><strong style="color:var(--accent)">到底是投放定向没打到年轻人，还是内容本身人家压根不感兴趣？</strong></p><p class="dim">数据能告诉你"够不着"，怎么够着——调投放还是改内容——得你自己拿主意。</p></div></div>
+<div>
+<div class="card card-accent"><h4>🔴 高置信度</h4><p class="dim">M2 24 场全量人群画像 + M1 千川投放，两个独立来源交叉验证。</p></div>
+<div class="card mt-s"><h4>📊 核心数字</h4><p class="dim">18-30 岁曝光仅占 <strong>15.5%</strong> · 18-24 TGI <strong>0.27</strong>（最低 0.17）<br>TGI = 人群偏好指数，1.0 是平均水平，0.27 = 严重偏低<br>千川投放 31-40 岁占计划数 62% · 整条链路朝成熟人群倾斜</p></div>
 </div>
-<div class="deck-footer"><span class="mono">#洞察①</span><span>5 / 12</span></div>
+<div>
+<div class="card card-accent"><h4>⚠️ 两个前提</h4><p class="dim">① M2 三组人群不嵌套，不能相除算转化率——"看到了没转化"这件事暂时说不了<br>② 仅 6 月单月快照，长期规律待验证</p></div>
+<div class="card mt-s"><h4>👤 人判断什么</h4><p class="dim" style="color:var(--accent)"><strong>到底是投放定向没打到年轻人，还是内容本身人家压根不感兴趣？</strong></p><p class="dim">数据能告诉你"够不着"，怎么够着——调投放还是改内容——得你自己拿主意。</p></div>
+</div>
+</div>
+<aside class="notes"><p>邵俊钦。年轻人在哪？没在我们这。18到30岁只占15.5%，TGI只有0.27。整条链路朝成熟人群倾斜。高置信。两个前提：M2不嵌套不能算转化率、只有6月单月。人判断：到底是投放没打到还是内容不感兴趣？</p></aside>
 </section>
 
-<!-- P6 -->
-<section class="slide" id="s6">
+<!-- ════════════ P6 ════════════ -->
+<section class="slide" data-title="Insight 2">
 <p class="kicker">05 · 洞察 ② · 邵俊钦</p>
 <h2 class="h2"><span class="accent">货不对板</span>，<br>不是货不行。</h2>
 <div class="grid g2 mt-l">
-<div><div class="card card-accent"><h4>🟡 中置信度</h4><p class="dim">M1-05 + M3 人工月报 + M4 工单，三个来源方向一致。客服侧文本是人工抽样，样本量有限。</p></div>
-<div class="card mt-s"><h4>📊 核心数字</h4><p class="dim">退款金额率 <strong>47%</strong> · 直播占退款 <strong>68%</strong><br>商品+尺码占工单 <strong>66.8%</strong> · 仓库工单仅 11% 环比无变化<br>客服原声："和图片不一样""杯型不合适""穿身上闷"</p></div></div>
-<div><div class="card card-accent"><h4>⚠️ 硬边界</h4><p class="dim">0.82% 工单关联率 ≠ 退款责任率<br>M4 商品行粒度 ≠ 订单数——统计强制走 <span class="mono">COUNT DISTINCT 主订单号</span><br>缺关键数据：退款订单 × 原因 × SKU 交叉关联</p></div>
-<div class="card mt-s"><h4>👤 人判断什么</h4><p class="dim"><strong style="color:var(--accent)">功能性缺陷 → 改产品。尺码认知偏差 → 改详情页。</strong></p><p class="dim">数据能帮你定位到"尺码问题是大头"，具体动哪个、怎么动——得你来判断。</p></div></div>
+<div>
+<div class="card card-accent"><h4>🟡 中置信度</h4><p class="dim">M1-05 + M3 人工月报 + M4 工单，三个来源方向一致。客服侧文本是人工抽样，样本量有限。</p></div>
+<div class="card mt-s"><h4>📊 核心数字</h4><p class="dim">退款金额率 <strong>47%</strong> · 直播占退款 <strong>68%</strong><br>商品+尺码占工单 <strong>66.8%</strong> · 仓库工单仅 11% 环比无变化<br>客服原声："和图片不一样""杯型不合适""穿身上闷"</p></div>
 </div>
-<div class="deck-footer"><span class="mono">#洞察②</span><span>6 / 12</span></div>
+<div>
+<div class="card card-accent"><h4>⚠️ 硬边界</h4><p class="dim">0.82% 工单关联率 ≠ 退款责任率<br>M4 商品行粒度 ≠ 订单数——统计强制走 <span class="mono">COUNT DISTINCT 主订单号</span><br>缺关键数据：退款订单 × 原因 × SKU 交叉关联</p></div>
+<div class="card mt-s"><h4>👤 人判断什么</h4><p class="dim" style="color:var(--accent)"><strong>功能性缺陷 → 改产品。尺码认知偏差 → 改详情页。</strong></p><p class="dim">数据能帮你定位到"尺码问题是大头"，具体动哪个、怎么动——得你来判断。</p></div>
+</div>
+</div>
+<aside class="notes"><p>邵俊钦。退货根因——货不对板，不是货不行。用户看到和拿到的不一致。仓库端工单只占11%，发货不是压力源头。中置信——客服文本是人工抽样的。硬边界：0.82%不等于退款责任率，缺退款×原因×SKU交叉关联。人判断：功能缺陷改产品，尺码偏差改详情页。</p></aside>
 </section>
 
-<!-- P7 -->
-<section class="slide" id="s7">
+<!-- ════════════ P7 ════════════ -->
+<section class="slide" data-title="Insight 3">
 <p class="kicker">06 · 洞察 ③ · 邵俊钦</p>
 <h2 class="h2">M1 到 M5 每份材料都埋了坑，<br>我们的应对：<span class="accent">把坑焊死在代码里</span></h2>
 <div class="stack mt-l">
@@ -136,125 +116,115 @@ tbody td{padding:6px 10px;border-bottom:1px solid rgba(255,255,255,0.06);font-si
 <div class="rule-row"><span class="num red">M3</span><div><b>人工样本</b><span class="mono"> → sample_only，不允许出比率</span></div></div>
 <div class="rule-row"><span class="num red">M5</span><div><b>专家互相打架</b><span class="mono"> → 28 个指标，零个引用 M5</span></div></div>
 </div>
-<p class="lede mt-l" style="text-align:center;font-size:22px;color:var(--accent)">最开始让 LLM 直接读数据，它自己偷偷做了跨组相除。<br>发现之后没有调 prompt——<strong>改了架构。</strong><br><br>外包调 prompt，FDE 改架构。</p>
-<div class="deck-footer"><span class="mono">#洞察③</span><span>7 / 12</span></div>
+<p class="lede mt-l" style="text-align:center;font-size:22px;color:var(--accent)">
+最开始让 LLM 直接读数据，它自己偷偷做了跨组相除。<br>发现之后没有调 prompt——<strong>改了架构。</strong><br><br>外包调 prompt，FDE 改架构。
+</p>
+<aside class="notes"><p>邵俊钦。M1到M5每份材料都埋了坑，把坑焊死在代码里。M2跨组相除直接ForbiddenCalculationError。M4强制COUNT DISTINCT。M1搞了metrics.yaml。M3标sample_only不出比率。M5专家互相打架28个指标零个引用。最开始LLM自己做跨组相除，发现后没调prompt，改了架构。停顿半秒。外包调prompt，FDE改架构。</p></aside>
 </section>
 
-<!-- P8 -->
-<section class="slide" id="s8">
+<!-- ════════════ P8 ════════════ -->
+<section class="slide" data-title="Architecture">
 <p class="kicker">07 · 架构 · 梁曦霖</p>
 <h2 class="h2"><span class="accent">AI 原生</span>架构：宁可少说，不可错说</h2>
 <div class="stack mt-l" style="gap:10px">
-<div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;font-size:11px;margin-bottom:12px">
-<span class="pipe-box" style="background:rgba(88,166,255,0.15);border:1px solid rgba(88,166,255,0.3);color:var(--blue)">M1-M5 预置</span><span style="color:var(--text2)">→</span>
-<span class="pipe-box" style="background:rgba(63,185,80,0.15);border:1px solid rgba(63,185,80,0.3);color:var(--green)">DuckDB 证据库</span><span style="color:var(--text2)">→</span>
-<span class="pipe-box" style="background:rgba(188,140,255,0.15);border:1px solid rgba(188,140,255,0.3);color:var(--purple)">Agent 5工具 ≤3轮</span><span style="color:var(--text2)">→</span>
-<span class="pipe-box" style="background:rgba(248,81,73,0.15);border:1px solid rgba(248,81,73,0.3);color:var(--red)">validator 四条校验</span><span style="color:var(--text2)">→</span>
-<span class="pipe-box" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2)">观点卡</span>
+<div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:12px;margin-bottom:16px">
+<span style="background:rgba(88,166,255,0.15);border:1px solid rgba(88,166,255,0.3);color:#58a6ff;padding:5px 10px;border-radius:6px;font-weight:600">M1-M5 预置</span>
+<span style="color:var(--text-3)">→</span>
+<span style="background:rgba(63,185,80,0.15);border:1px solid rgba(63,185,80,0.3);color:#3fb950;padding:5px 10px;border-radius:6px;font-weight:600">DuckDB 证据库<br><span style="font-size:10px;opacity:0.7">28 指标 + metrics.yaml</span></span>
+<span style="color:var(--text-3)">→</span>
+<span style="background:rgba(188,140,255,0.15);border:1px solid rgba(188,140,255,0.3);color:#bc8cff;padding:5px 10px;border-radius:6px;font-weight:600">Agent 5 工具<br><span style="font-size:10px;opacity:0.7">≤3 轮 · 只见摘要和聚合</span></span>
+<span style="color:var(--text-3)">→</span>
+<span style="background:rgba(248,81,73,0.15);border:1px solid rgba(248,81,73,0.3);color:#f85149;padding:5px 10px;border-radius:6px;font-weight:600">validator 四条校验<br><span style="font-size:10px;opacity:0.7">不过就丢弃</span></span>
+<span style="color:var(--text-3)">→</span>
+<span style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.2);padding:5px 10px;border-radius:6px;font-weight:600">观点卡</span>
 </div>
-<div style="text-align:center;font-size:11px;color:var(--text2);margin-bottom:10px">用户拖入文件 → parse_excel 即时解析 → 会话临时库（LLM 不碰原始行）</div>
-<div class="grid g3" style="gap:8px">
-<div class="card card-accent" style="padding:12px"><h4 style="font-size:13px;margin:0 0 6px 0">三道硬约束</h4><p class="dim" style="font-size:11px;line-height:1.6;margin:0">① 数字由代码算，LLM 不碰计算器<br>② LLM 只见摘要和聚合，不见原始行<br>③ 无证据不输出——ID 不存在就丢弃</p></div>
-<div class="card card-accent" style="padding:12px"><h4 style="font-size:13px;margin:0 0 6px 0">五种降级</h4><p class="dim" style="font-size:11px;line-height:1.6;margin:0">API 挂 → 模板卡片<br>表缺失 → 不生成 + 列缺什么<br>全被丢 → 原始异常列表<br>超范围 → "当前数据无法回答"<br>链路崩 → "系统出错，再试一次"</p></div>
-<div class="card card-accent" style="padding:12px"><h4 style="font-size:13px;margin:0 0 6px 0">AI 原生，不是边缘贴皮</h4><p class="dim" style="font-size:11px;line-height:1.6;margin:0">AI 进核心分析链路——选题和归因<br>不是客服，不是文案<br>数据流围绕 AI 能力边界重切<br>边缘型短期没事，长期附庸</p></div>
+<div style="text-align:center;font-size:11px;color:var(--text-3);margin-bottom:14px">用户拖入文件 → parse_excel 即时解析 → 会话临时库（LLM 不碰原始行）</div>
+<div class="grid g3" style="gap:10px">
+<div class="card card-accent" style="padding:12px 14px"><h4 style="font-size:13px;margin:0 0 8px 0">三道硬约束</h4><p class="dim" style="font-size:11px;line-height:1.6;margin:0">① 数字由代码算，LLM 不碰计算器<br>② LLM 只见摘要和聚合，不见原始行<br>③ 无证据不输出——ID 不存在就丢弃</p></div>
+<div class="card card-accent" style="padding:12px 14px"><h4 style="font-size:13px;margin:0 0 8px 0">五种降级</h4><p class="dim" style="font-size:11px;line-height:1.6;margin:0">API 挂 → 模板卡片<br>表缺失 → 不生成 + 列缺什么<br>全被丢 → 原始异常列表<br>超范围 → "当前数据无法回答"<br>链路崩 → "系统出错，再试一次"</p></div>
+<div class="card card-accent" style="padding:12px 14px"><h4 style="font-size:13px;margin:0 0 8px 0">AI 原生，不是边缘贴皮</h4><p class="dim" style="font-size:11px;line-height:1.6;margin:0">AI 进核心分析链路——选题和归因<br>不是客服，不是文案<br>数据流围绕 AI 能力边界重切<br>边缘型短期没事，长期附庸</p></div>
 </div>
 </div>
-<div class="deck-footer"><span class="mono">#架构</span><span>8 / 12</span></div>
+<aside class="notes"><p>梁曦霖讲架构。数据流：M1-M5预置+拖入 → DuckDB 28指标 → Agent 5工具 ≤3轮 → validator四条校验 → 观点卡。三道硬约束。五种降级全跑通——宁可少说不可错说。AI原生做法——AI进核心分析链路，不是给旧流程加聊天插件。</p></aside>
 </section>
 
-<!-- P9 -->
-<section class="slide" id="s9">
+<!-- ════════════ P9 ════════════ -->
+<section class="slide" data-title="Human-AI Division">
 <p class="kicker">08 · 人机分工 · 高佳慧</p>
 <h2 class="h2">代码算数，<span class="accent">AI 说话，人做决定</span></h2>
 <div class="grid g2 mt-l">
 <div>
 <table style="width:100%;border-collapse:collapse;font-size:15px;line-height:2">
-<tr style="border-bottom:1px solid rgba(255,255,255,0.1)"><td style="padding:8px 0;color:var(--text2)">数据清洗 / 口径对齐</td><td style="padding:8px 0;text-align:right"><strong style="color:var(--green)">代码</strong></td></tr>
-<tr style="border-bottom:1px solid rgba(255,255,255,0.1)"><td style="padding:8px 0;color:var(--text2)">指标计算（28 个指标）</td><td style="padding:8px 0;text-align:right"><strong style="color:var(--green)">代码</strong></td></tr>
-<tr style="border-bottom:1px solid rgba(255,255,255,0.1)"><td style="padding:8px 0;color:var(--text2)">异常检测 / 证据校验</td><td style="padding:8px 0;text-align:right"><strong style="color:var(--green)">代码</strong></td></tr>
-<tr style="border-bottom:1px solid rgba(255,255,255,0.1)"><td style="padding:8px 0;color:var(--text2)">置信度定级（AI 只能下调）</td><td style="padding:8px 0;text-align:right"><strong style="color:var(--green)">代码打底</strong></td></tr>
-<tr style="border-bottom:1px solid rgba(255,255,255,0.1)"><td style="padding:8px 0;color:var(--text2)">选题 / 归因 / 措辞</td><td style="padding:8px 0;text-align:right"><strong style="color:var(--purple)">AI</strong></td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1)"><td style="padding:8px 0;color:var(--text-2)">数据清洗 / 口径对齐</td><td style="padding:8px 0;text-align:right"><strong style="color:#3fb950">代码</strong></td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1)"><td style="padding:8px 0;color:var(--text-2)">指标计算（28 个指标）</td><td style="padding:8px 0;text-align:right"><strong style="color:#3fb950">代码</strong></td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1)"><td style="padding:8px 0;color:var(--text-2)">异常检测 / 证据校验</td><td style="padding:8px 0;text-align:right"><strong style="color:#3fb950">代码</strong></td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1)"><td style="padding:8px 0;color:var(--text-2)">置信度定级（AI 只能下调）</td><td style="padding:8px 0;text-align:right"><strong style="color:#3fb950">代码打底</strong></td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,0.1)"><td style="padding:8px 0;color:var(--text-2)">选题 / 归因 / 措辞</td><td style="padding:8px 0;text-align:right"><strong style="color:#bc8cff">AI</strong></td></tr>
 <tr><td style="padding:8px 0;color:var(--accent);font-size:16px"><strong>最终经营决策</strong></td><td style="padding:12px 0;text-align:right;font-size:16px"><strong style="color:var(--accent)">业务人员</strong></td></tr>
 </table>
 </div>
-<div><div class="card card-accent"><h4>设计的底线</h4><p class="dim" style="font-size:15px;line-height:1.8">做 AI 数据产品，最怕的不是没输出——<strong>是瞎输出。</strong><br>LLM 永不碰原始数据行<br>AI 的每个数字都来自代码计算<br>校验不通过 → 直接丢弃 + 透明计数</p></div>
-<p class="mono mt-m" style="font-size:13px;color:var(--accent);text-align:center">原则四个字：宁可少说，不可错说</p></div>
+<div>
+<div class="card card-accent"><h4>设计的底线</h4><p class="dim" style="font-size:15px;line-height:1.8">做 AI 数据产品，最怕的不是没输出——<strong>是瞎输出。</strong><br>LLM 永不碰原始数据行<br>AI 的每个数字都来自代码计算<br>校验不通过 → 直接丢弃 + 透明计数<br>编号造 → 五种降级全部可跑</p></div>
+<p class="mono mt-m" style="font-size:13px;color:var(--accent);text-align:center">原则四个字：宁可少说，不可错说</p>
 </div>
-<div class="deck-footer"><span class="mono">#人机分工</span><span>9 / 12</span></div>
+</div>
+<aside class="notes"><p>代码管算数和校验，AI管选题和措辞，人做最终决策。AI只能下调置信度不能上调。最怕不是没输出，是瞎输出。LLM永不碰原始行，校验不过就丢弃。宁可少说不可错说。</p></aside>
 </section>
 
-<!-- P10 -->
-<section class="slide" id="s10">
+<!-- ════════════ P10 ════════════ -->
+<section class="slide" data-title="Adoption + Hypothesis">
 <p class="kicker">09 · 采用 + 加分项 · 高佳慧</p>
 <h2 class="h2">一步，零录入，可发群<br><span class="accent">+ 一条待验证的年轻人群假设</span></h2>
 <div class="grid g2 mt-l">
-<div><div class="card card-accent" style="padding:12px 16px;margin-bottom:6px"><h4 style="font-size:14px;margin:0">① 1 步操作</h4><p class="dim" style="font-size:13px;margin:2px 0 0 0">从资源管理器拖文件到老板身上。零录入。</p></div>
-<div class="card card-accent" style="padding:12px 16px;margin-bottom:6px"><h4 style="font-size:14px;margin:0">② 1 张观点卡，直接复制发群</h4><p class="dim" style="font-size:13px;margin:2px 0 0 0">深度一两分钟 / 快速几十秒。工作历史落盘，关掉重启还在。</p></div>
-<div class="card card-accent" style="padding:12px 16px;margin-bottom:6px"><h4 style="font-size:14px;margin:0">③ 鞭子 = 用户可控的速度选择</h4><p class="dim" style="font-size:13px;margin:2px 0 0 0">深度~28 次工具调用 vs 快速腰斩。真的改 thinking 参数。</p></div>
-<div class="card" style="padding:12px 16px;border:1px dashed rgba(255,255,255,0.2)"><h4 style="font-size:14px;margin:0;color:var(--accent)">改变了什么数字</h4><p class="dim" style="font-size:13px;margin:2px 0 0 0">决策准备时间：30 分钟手动翻表 → 拖文件等一两分钟。<strong style="color:var(--accent)">缩短 90%。</strong></p></div></div>
-<div><div class="card card-accent" style="border:2px dashed rgba(255,255,255,0.25);background:rgba(255,255,255,0.02)">
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="background:rgba(255,255,255,0.1);padding:2px 10px;border-radius:4px;font-size:12px;font-weight:700">⚪ 待验证</span><span style="font-size:11px;color:var(--text2)">低置信度 · 跨品牌外推</span></div>
-<h4 style="font-size:16px;margin:0 0 8px 0">★ 年轻人群对内衣的核心诉求<br>与成熟人群存在结构性差异</h4>
-<p class="dim" style="font-size:13px;line-height:1.7;margin:0">M3 客户原声中"透气""无痕""大胸显小"高频出现，在成熟品牌数据中不突出。<br>M5 内容策略专家与产品专家判断存在冲突——内容侧强调穿搭表达，产品侧强调功能支撑。<br><strong>冲突观点并列呈现，不替专家选边站。</strong><br>新品牌 LANSU 无任何内部数据——仅作假设，不得作为决策依据。</p>
-</div></div>
+<div>
+<div class="card card-accent" style="padding:14px 18px;margin-bottom:8px"><h4 style="font-size:14px;margin:0">① 1 步操作</h4><p class="dim" style="font-size:13px;margin:4px 0 0 0">从资源管理器拖文件到老板身上。零录入。</p></div>
+<div class="card card-accent" style="padding:14px 18px;margin-bottom:8px"><h4 style="font-size:14px;margin:0">② 1 张观点卡，直接复制发群</h4><p class="dim" style="font-size:13px;margin:4px 0 0 0">深度一两分钟 / 快速几十秒。工作历史落盘，关掉重启还在。</p></div>
+<div class="card card-accent" style="padding:14px 18px;margin-bottom:8px"><h4 style="font-size:14px;margin:0">③ 鞭子 = 用户可控的速度选择</h4><p class="dim" style="font-size:13px;margin:4px 0 0 0">深度~28 次工具调用 vs 快速腰斩。真的改 thinking 参数。</p></div>
+<div class="card" style="padding:14px 18px;border:1px dashed rgba(255,255,255,0.2)"><h4 style="font-size:14px;margin:0;color:var(--accent)">改变了什么数字</h4><p class="dim" style="font-size:13px;margin:4px 0 0 0">决策准备时间：30 分钟手动翻表 → 拖文件等一两分钟。<strong style="color:var(--accent)">缩短 90%。</strong></p></div>
 </div>
-<div class="deck-footer"><span class="mono">#采用</span><span>10 / 12</span></div>
+<div>
+<div class="card card-accent" style="border:2px dashed rgba(255,255,255,0.25);background:rgba(255,255,255,0.02)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><span style="background:rgba(255,255,255,0.1);padding:2px 10px;border-radius:4px;font-size:12px;font-weight:700">⚪ 待验证</span><span style="font-size:11px;color:var(--text-3)">低置信度 · 跨品牌外推</span></div>
+<h4 style="font-size:17px;margin:0 0 10px 0">★ 年轻人群对内衣的核心诉求<br>与成熟人群存在结构性差异</h4>
+<p class="dim" style="font-size:13px;line-height:1.7;margin:0">M3 客户原声中"透气""无痕""大胸显小"高频出现，在成熟品牌数据中不突出。<br>M5 内容策略专家与产品专家判断存在冲突——内容侧强调穿搭表达，产品侧强调功能支撑。<br><strong>冲突观点并列呈现，不替专家选边站。</strong><br>新品牌 LANSU 无任何内部数据——仅作假设，不得作为决策依据。</p>
+</div>
+</div>
+</div>
+<aside class="notes"><p>采用：一步拖文件零录入，一张可发群的卡。鞭子真的改thinking参数。决策准备时间从30分钟到一两分钟。加分项：年轻人群假设——M5两位专家判断冲突，我们并列呈现不选边站。新品牌LANSU没有内部数据，所有判断都是跨品牌外推，标灰。</p></aside>
 </section>
 
-<!-- P11 -->
-<section class="slide" id="s11">
+<!-- ════════════ P11 ════════════ -->
+<section class="slide" data-title="Gaps + Risk">
 <p class="kicker">10 · 风险与缺口 · 高佳慧</p>
 <h2 class="h2">48 小时，暴露了<span class="accent">三个还没解决的问题</span></h2>
-<div class="grid g2 mt-l" style="grid-template-columns:1.3fr 0.7fr">
-<div>
-<h4 style="color:var(--accent);margin:0 0 10px 0">我们需要客户补充</h4>
-<div class="card" style="padding:10px 14px;margin-bottom:5px"><p class="dim" style="font-size:12px;margin:0">① M6 数据口径、更新频率、权限 —— <strong style="color:var(--accent)">最优先</strong><br><span style="font-size:11px;color:var(--text2)">→ 决定这个工具能不能活过两个月。打通自动化更新，不再靠人工导 Excel。</span></p></div>
-<div class="card" style="padding:10px 14px;margin-bottom:5px"><p class="dim" style="font-size:12px;margin:0">② 新品牌 LANSU 成交 / 投放 / 人群数据<br><span style="font-size:11px;color:var(--text2)">→ 年轻人群结论不再靠跨品牌外推，从"待验证"升级为可核验洞察。</span></p></div>
-<div class="card" style="padding:10px 14px;margin-bottom:5px"><p class="dim" style="font-size:12px;margin:0">③ M3 全量客服对话 + 直播弹幕 + 评论原文<br><span style="font-size:11px;color:var(--text2)">→ 从人工样本升级为全量分析，尺码问题真实权重可量化。</span></p></div>
-<div class="card" style="padding:10px 14px"><p class="dim" style="font-size:12px;margin:0">④ 目标用户访谈 + 业务人员痛点访谈<br><span style="font-size:11px;color:var(--text2)">→ M5 专家冲突的判断，用真实用户声音来验证。Agent 输出嵌入真实工作流。</span></p></div>
+<div class="stack mt-l">
+<div class="rule-row"><span class="num red">数据</span><div><b>M6 口径、更新频率、权限 <span style="color:var(--accent);font-size:13px">· 最优先</span></b><p class="dim">决定这个工具能不能活过两个月。打通自动化更新，不再靠人工每月导 Excel。</p></div></div>
+<div class="rule-row"><span class="num blue">数据</span><div><b>新品牌 LANSU 成交 / 投放 / 人群数据</b><p class="dim">年轻人群结论不再靠跨品牌外推，从"待验证假设"升级为可核验洞察。</p></div></div>
+<div class="rule-row"><span class="num blue">数据</span><div><b>M3 全量客服对话 + 直播弹幕 + 评论原文</b><p class="dim">从人工样本升级为全量分析，尺码问题的真实权重可以量化。</p></div></div>
+<div class="rule-row"><span class="num green">认知</span><div><b>目标用户访谈 + 业务人员痛点访谈</b><p class="dim">M5 专家互相冲突的判断，用真实用户声音来验证。Agent 输出格式嵌入真实工作流。</p></div></div>
 </div>
-<div>
-<div style="border-left:3px solid var(--red);padding:16px 18px;background:rgba(248,81,73,0.06);border-radius:0 8px 8px 0">
-<p style="font-size:18px;font-weight:700;color:var(--red);margin:0 0 4px 0">⚠ 最大风险</p>
-<p class="dim" style="font-size:14px;line-height:1.7;margin:0">M6 数据目前靠人工每月导 Excel。<br>两个月后没人维护，系统成空壳。<br>采用做得再好，断供就什么都没了。</p>
+<div style="margin-top:20px;border:2px solid #f85149;border-radius:10px;padding:16px 22px;background:rgba(248,81,73,0.06)">
+<p style="font-size:18px;font-weight:700;color:#f85149;margin:0 0 4px 0">最大风险：数据断供</p>
+<p style="font-size:15px;color:var(--text-2);margin:0;line-height:1.6">M6 数据目前靠人工每月导 Excel。两个月后没人维护，系统成空壳。采用做得再好，断供就什么都没了。</p>
 </div>
-</div>
-</div>
-<div class="deck-footer"><span class="mono">#风险与缺口</span><span>11 / 12</span></div>
+<aside class="notes"><p>48小时暴露了三个还没解决的问题。M6口径最优先决定系统能不能活过两个月。LANSU数据补齐才能从方向对变成可量化。M3全量数据让尺码权重可量化。认知层面专家打架需要真实用户访谈验证。指着红色框——最大风险M6数据断供，两个月后没人维护系统成空壳。</p></aside>
 </section>
 
-<!-- P12 -->
-<section class="slide" id="s12">
+<!-- ════════════ P12 ════════════ -->
+<section class="slide" data-title="Close">
 <p class="kicker">11 · 结尾</p>
 <h2 class="h2">48 小时，从五份打架的脏表<br>到<span class="accent">每个数字都可追溯</span>的证据库</h2>
 <div class="grid g2 mt-l">
 <div class="card card-accent"><h4>我们交付了什么</h4><p class="dim" style="font-size:15px;line-height:1.8">✓ 可运行的桌宠 Agent<br>✓ 28 个指标的证据库<br>✓ 四条校验硬拦截<br>✓ 五种降级全部可跑<br>✓ 1 条待验证年轻人群假设</p></div>
 <div class="card card-accent"><h4>下一步</h4><p class="dim" style="font-size:15px;line-height:1.8;color:var(--accent)"><strong>不是在电脑上优化 prompt——<br>是把小澜放到真实的周一早会现场，<br>让业务人员用真实问题撞它，<br>把反馈信号回流进系统。</strong></p><p class="dim" style="font-size:13px;margin-top:8px">这才是 FDE 和外包的真正区别。</p></div>
 </div>
-<p class="lede mt-l" style="text-align:center;font-size:20px">谢谢。欢迎提问。</p>
-<div class="deck-footer"><span class="mono">#谢谢 · Q&A</span><span>12 / 12</span></div>
+<p class="lede mt-l" style="text-align:center">谢谢。欢迎提问。</p>
+<div class="deck-footer"><span class="mono">#谢谢 · Q&A</span><span class="slide-number" data-current="12" data-total="12"></span></div>
+<aside class="notes"><p>48小时从五份打架的脏表到每个数字都可追溯的证据库。下一步不是在电脑上优化prompt——是把小澜放到真实早会现场，让业务人员用真实问题撞它，把反馈信号回流进系统。这才是FDE和外包的真正区别。谢谢。欢迎提问。</p></aside>
 </section>
 
 </div>
-
-<div class="nav-hint">← → 翻页 · F 全屏</div>
-
-<script>
-let current = 0;
-const slides = document.querySelectorAll('.slide');
-const total = slides.length;
-
-function show(index) {
-  slides[current].classList.remove('active');
-  current = (index + total) % total;
-  slides[current].classList.add('active');
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
-  if (e.key === 'f' || e.key === 'F') { document.body.requestFullscreen().catch(()=>{}); }
-});
-</script>
+<div style="position:fixed;bottom:12px;left:12px;font-size:11px;color:#484f5866;z-index:100;pointer-events:none">S 演讲者视图 · T 切换主题 · ← → 翻页 · F 全屏 · O 总览 · R 重置计时</div>
+<script src="assets/runtime.js"></script>
 </body>
 </html>
